@@ -13,3 +13,5 @@
 - v-on or @event
 - the interpolation of the data
 - computed function
+
+![preview image](/img/preview.png)
