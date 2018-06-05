@@ -1,5 +1,5 @@
 .detailed-car-image {
-  height: 200px;
+  height: 300px;
 }
 
 .list-group-item {
@@ -24,7 +24,7 @@
   transition: all, .5s;
 }
 
-.phone-enter, .phone-leave-to { /* ачальное состояние, и конечное одинаковые */
+.phone-enter, .phone-leave-to { /* начальное состояние, и конечное одинаковые */
   transform: translateX(50px);
   opacity: 0;
 }
@@ -33,7 +33,7 @@
   transition: all, .5s;
 }
 
-.modal-enter, .modal-leave-to { /* ачальное состояние, и конечное одинаковые */
+.modal-enter, .modal-leave-to { 
   transform: translateY(-100px);
   opacity: 0;
 }

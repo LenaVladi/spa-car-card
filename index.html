@@ -55,14 +55,19 @@
                 :alt="car.name"  
                 class="rounded detailed-car-image">
           </div>  
-          <div class="col-md-7 pt-2">
-            <h5>Car details</h5>
 
+        </div>
+        <div class="row">
+          <div class="col-md-12 pt-2">
+            <h5>Car details</h5>
             <ul>
               <li>Model <strong>{{ car.model }}</strong></li>
               <li>Year <strong>{{ car.year }}</strong></li>
-              <li>Owner <strong>{{ car.owner }}</strong></li>
             </ul>
+            <h4>Reference</h4>
+            <p>
+              {{ car.reference }}
+            </p>
             <!-- if  phoneVisibility = true -->
             <!-- @ - listen event as v-on:event  -->
             <div class="phone-block">
