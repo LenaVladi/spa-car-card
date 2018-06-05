@@ -28,13 +28,13 @@
             id="search" 
             placeholder="Name, model ..."
             v-model="search" 
-          >
+          > 
         </div>
         <hr>
 
         <ul class="list-group">
           <li 
-            v-for="(car, index) in filteredCars"
+            v-for="(car, index) of filteredCars"
             class="list-group-item list-group-item-action pointer"
             v-on:click="selectCar(index)"
             :class="{'active': selectCarIndex === index}"
@@ -66,11 +66,13 @@
             <!-- if  phoneVisibility = true -->
             <!-- @ - listen event as v-on:event  -->
             <div class="phone-block">
-              <p v-if="phoneVisibility">{{ car.phone }}</p> 
+              <transition name="phone">
+                <p v-if="phoneVisibility">{{ car.phone }}</p>
+              </transition>
             </div>
             
             <button 
-              class="btn btn-outline-success mr-3" 
+              class="btn btn-outline-success" 
               @click="phoneVisibility = !phoneVisibility">{{ phoneBtnText }}</button> 
             <button class="btn btn-primary" @click="modavVisibility = true">Buy</button>
           </div>
@@ -78,7 +80,23 @@
       </div>
     </div>
 
-    <div class="modal" tabindex="-1" role="dialog" v-if="modavVisibility">
+    <div class="row pt-3" v-if="logs.length !== 0">
+      <div class="col-md-12">
+        <ul class="list-group">
+          <li 
+            v-for="log in logs"
+            class="list-group-item list-group-item-secondary"
+            :class="{
+              'list-group-item-warning': log.type === 'cnl',
+              'list-group-item-success': log.type === 'ok'
+            }"
+          >{{ log.text }} {{ log.date | date }}</li>
+        </ul>
+      </div>
+    </div>
+    
+    <transition name="modal">
+      <div class="modal" tabindex="-1" role="dialog" v-if="modavVisibility">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -94,16 +112,38 @@
             </button>
           </div>
           <div class="modal-body">
-            <p>Modal body text goes here.</p>
+            <p>Cerrent car - <strong>{{ car.name }}</strong></p>
+
+            <ul>
+              <li>Model <strong>{{ car.model }}</strong></li>
+              <li>Year <strong>{{ car.year }}</strong></li>
+              <li>Owner <strong>{{ car.owner }}</strong></li>
+            </ul>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="modavVisibility = false">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button 
+              type="button" 
+              class="btn btn-primary" 
+              data-dismiss="modal" 
+              @click="newOrder"
+            >
+              Bye
+            </button>
+            <button 
+              type="button" 
+              class="btn btn-secondsry"
+              @click="cancelOrder"
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </div>
-    </div>
-    <div class="modal-backdrop fade show" v-if="modavVisibility"></div>
+      </div>
+    </transition>
+    <transition name="fade">
+      <div class="modal-backdrop fade show" v-if="modavVisibility"></div>
+    </transition>
     
 
   </div>
