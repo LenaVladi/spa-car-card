@@ -34,10 +34,11 @@
 
         <ul class="list-group">
           <li 
-            v-for="(car, index) of filteredCars"
+            v-for="(car, index) in filteredCars"
             class="list-group-item list-group-item-action pointer"
             v-on:click="selectCar(car)"
             :class="{'active': selectCarIndex === index}"
+            :key="index"
           >
             {{ car.name }} - {{ car.model }}
           </li>
